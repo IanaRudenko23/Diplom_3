@@ -10,6 +10,7 @@ import org.praktikum.baseUserConfig.BaseUserSteps;
 import org.praktikum.configuration.SetUpBrowser;
 import org.praktikum.pages.MainPage;
 import org.praktikum.pojo.UserRequest;
+
 import java.util.concurrent.TimeUnit;
 
 import static org.apache.http.HttpStatus.SC_ACCEPTED;
@@ -39,8 +40,8 @@ public class RegisterParameterizedTest {
     @Parameterized.Parameters(name = "Регистрация пользователя: {1}, браузер: {3}")
     public static Object[][] clientRegister() {
         return new Object[][]{
-                {"Hugo", "Hugo_Boss@mail.ru", "hugoHugo", "chrome"},//позитив кейс в гугл хром
-                {"Bella07","bella_swann@mail.ru07","swann123", "yandex"}//позитив кейс в яндекс браузере
+                {"Ralf", "Ralf_Loren@mail.ru", "ralfLoren", "chrome"},//позитив кейс в гугл хром
+                {"Bella07", "bella_swann07@mail.ru", "swann123", "yandex"}//позитив кейс в яндекс браузере
         };
     }
 
@@ -59,7 +60,7 @@ public class RegisterParameterizedTest {
         UserRequest userRequestForDelete;
 
         CreateBaseUser.createBaseUser(name, email, password, driver);//создали пользователя
-        LoginBaseUser.logInBaseUser(password,email,driver);//залогинили пользователя
+        LoginBaseUser.logInBaseUser(password, email, driver);//залогинили пользователя
 
 
         userRequestForDelete = getUserRequest(name, email, password);
@@ -75,9 +76,9 @@ public class RegisterParameterizedTest {
     @After
     public void tearDown() {
         driver.quit();
-            userRequest.deleteUser(accessToken).assertThat().statusCode(SC_ACCEPTED).and().
-                    body("success", equalTo(true));
-        }
+        userRequest.deleteUser(accessToken).assertThat().statusCode(SC_ACCEPTED).and().
+                body("success", equalTo(true));
     }
+}
 
 

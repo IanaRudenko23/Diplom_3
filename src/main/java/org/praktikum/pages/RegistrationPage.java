@@ -1,4 +1,5 @@
 package org.praktikum.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,29 +19,34 @@ public class RegistrationPage {//описание локаторов и мето
     String password;
     private final By loginPageLocator = By.xpath(".//div/form/button[text()='Войти']");
     private final By logInLink = By.xpath(".//a[@class='Auth_link__1fOlj']");
-    public RegistrationPage (WebDriver driver){
+
+    public RegistrationPage(WebDriver driver) {
         this.driver = driver;
     }
-    public void openFormOfRegister(){//метод открытия страницы заполнения полей для регистрации
-         driver.findElement(personalAccountButton).click();
+
+    public void openFormOfRegister() {//метод открытия страницы заполнения полей для регистрации
+        driver.findElement(personalAccountButton).click();
         new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(registerButton));
         driver.findElement(registerButton).click();
         new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(formOfRegister));
     }
-    public void fillingSuccessRegistration(String name,String email,String password){//метод успешной регистрации, заполнение всех полей на странице регистрации
-         driver.findElement(nameInput).sendKeys(name);
-         driver.findElement(emailInput).sendKeys(email);
-         driver.findElement(passwordInput).sendKeys(password);
-         new WebDriverWait(driver, 15)
+
+    public void fillingSuccessRegistration(String name, String email, String password) {//метод успешной регистрации, заполнение всех полей на странице регистрации
+        driver.findElement(nameInput).sendKeys(name);
+        driver.findElement(emailInput).sendKeys(email);
+        driver.findElement(passwordInput).sendKeys(password);
+        new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(bigRegisterButton));
-         driver.findElement(bigRegisterButton).click();
+        driver.findElement(bigRegisterButton).click();
     }
-    public void clickLogInLink(){//метод Вход со страницы регистрации
-         driver.findElement(logInLink).click();
+
+    public void clickLogInLink() {//метод Вход со страницы регистрации
+        driver.findElement(logInLink).click();
     }
-    public void waitForLoginPage(){
+
+    public void waitForLoginPage() {
         new WebDriverWait(driver, 15)
                 .until(ExpectedConditions.elementToBeClickable(loginPageLocator));
     }

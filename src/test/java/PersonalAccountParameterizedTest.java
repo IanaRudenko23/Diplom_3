@@ -31,7 +31,8 @@ public class PersonalAccountParameterizedTest {
     private final String email;
     private final String name;
     private final By profileButton = By.xpath(".//a[text()='Профиль']");
-    public PersonalAccountParameterizedTest(String name, String email, String password, String browser){
+
+    public PersonalAccountParameterizedTest(String name, String email, String password, String browser) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -60,8 +61,8 @@ public class PersonalAccountParameterizedTest {
     public void checkEnterPersonalAccountFromMainPage() {
         UserRequest userRequestForDelete;
 
-        CreateBaseUser.createBaseUser(name,email,password,driver);//создали пользователя
-        LoginBaseUser.logInBaseUser(password,email,driver);//залогинили пользователя
+        CreateBaseUser.createBaseUser(name, email, password, driver);//создали пользователя
+        LoginBaseUser.logInBaseUser(password, email, driver);//залогинили пользователя
 
         userRequestForDelete = getUserRequest(name, email, password);
         ValidatableResponse loginResponse = userRequest.loginUser(userRequestForDelete);
@@ -71,7 +72,7 @@ public class PersonalAccountParameterizedTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.enterPersonalAccount();
         String expectedResult = "В этом разделе вы можете изменить свои персональные данные";
-        MatcherAssert.assertThat("Ошибка регистрации",driver.findElement(profileButton), anything(expectedResult));
+        MatcherAssert.assertThat("Ошибка регистрации", driver.findElement(profileButton), anything(expectedResult));
     }
 
     @Test
@@ -79,8 +80,8 @@ public class PersonalAccountParameterizedTest {
     public void checkLogOutFromPersonalAccount() {
         UserRequest userRequestForDelete;
 
-        CreateBaseUser.createBaseUser(name,email,password,driver);//создали пользователя
-        LoginBaseUser.logInBaseUser(password,email,driver); //залогинили пользователя
+        CreateBaseUser.createBaseUser(name, email, password, driver);//создали пользователя
+        LoginBaseUser.logInBaseUser(password, email, driver); //залогинили пользователя
 
         userRequestForDelete = getUserRequest(name, email, password);
         ValidatableResponse loginResponse = userRequest.loginUser(userRequestForDelete);
@@ -91,15 +92,15 @@ public class PersonalAccountParameterizedTest {
         mainPage.enterPersonalAccount();
         LoginBaseUser.logOutBaseUser(driver);
         String expectedResult = "Вы — новый пользователь?";
-        MatcherAssert.assertThat("Ошибка выхода из Личного кабинета",expectedResult,anything(expectedResult));
+        MatcherAssert.assertThat("Ошибка выхода из Личного кабинета", expectedResult, anything(expectedResult));
 
     }
 
     @After
     public void tearDown() {
         driver.quit();
-            userRequest.deleteUser(accessToken).assertThat().statusCode(SC_ACCEPTED).and().
-                    body("success", equalTo(true));
-        }
-
+        userRequest.deleteUser(accessToken).assertThat().statusCode(SC_ACCEPTED).and().
+                body("success", equalTo(true));
     }
+
+}

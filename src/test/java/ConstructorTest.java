@@ -21,69 +21,73 @@ public class ConstructorTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(SetUpBrowser.getBaseUrl());
     }
+
     @Test
     @DisplayName("Переход от раздела Булки к разделу Соусы")
-    public void changeBunToSouse(){
+    public void changeBunToSouse() {
         MainPage mainPage = new MainPage(driver);
-        assertTrue(mainPage.IsBunTabSelected());
+        assertTrue(mainPage.isBunTabSelected());
         mainPage.changeIngridientToSouse();
-        assertTrue(mainPage.IsSouseTabSelected());
+        assertTrue(mainPage.isSouseTabSelected());
     }
 
     @Test
     @DisplayName("Переход от раздела Соусы к разделу Начинки")
-    public void changeSouseToFillings(){
+    public void changeSouseToFillings() {
         MainPage mainPage = new MainPage(driver);
         mainPage.changeIngridientToSouse();
-        assertTrue(mainPage.IsSouseTabSelected());
+        assertTrue(mainPage.isSouseTabSelected());
         mainPage.changeIngredientToFillings();
-        assertTrue(mainPage.FillingsAreSelected());
+        assertTrue(mainPage.isFillingTabSelected());
     }
 
     @Test
     @DisplayName("Переход от раздела Начинки к разделу Булки")
-    public void changeFillingsToBun(){
+    public void changeFillingsToBun() {
         MainPage mainPage = new MainPage(driver);
         mainPage.changeIngredientToFillings();
-        assertTrue(mainPage.FillingsAreSelected());
+        assertTrue(mainPage.isFillingTabSelected());
         mainPage.changeIngridientToBuns();
-        assertTrue(mainPage.IsBunTabSelected());
+        assertTrue(mainPage.isBunTabSelected());
     }
 
     @Test
     @DisplayName("Переход от раздела Соусы к разделу Булки")
-    public void changeSouseToBun(){
+    public void changeSouseToBun() {
         MainPage mainPage = new MainPage(driver);
         mainPage.changeIngridientToSouse();
-        assertTrue(mainPage.IsSouseTabSelected());
+        assertTrue(mainPage.isSouseTabSelected());
         mainPage.changeIngridientToBuns();
-        assertTrue(mainPage.IsBunTabSelected());
+        assertTrue(mainPage.isBunTabSelected());
     }
+
     @Test
     @DisplayName("Переход от раздела Булки к разделу Начинки")
-    public void changeBunToFillings(){
+    public void changeBunToFillings() {
         MainPage mainPage = new MainPage(driver);
-        assertTrue(mainPage.IsBunTabSelected());
+        assertTrue(mainPage.isBunTabSelected());
         mainPage.changeIngredientToFillings();
-        assertTrue(mainPage.FillingsAreSelected());
+        assertTrue(mainPage.isFillingTabSelected());
     }
+
     @Test
     @DisplayName("Переход из Личного кабинета в Конструктор нажатием Лого")
-    public void moveToContstructorWithLogo(){
+    public void moveToContstructorWithLogo() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickPersonalAccountButtonOnMainPage();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickStellarBurgerLogo();
-        assertTrue(mainPage.IsBunTabSelected());
+        assertTrue(mainPage.isBunTabSelected());
     }
+
     @Test
     @DisplayName("Переход из Личного кабинета в Конструктор нажатием кнопки Конструктор")
-    public void moveToConstructorWithConstructorButton(){
+    public void moveToConstructorWithConstructorButton() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickPersonalAccountButtonOnMainPage();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickConstructorButton();
-        assertTrue(mainPage.IsBunTabSelected());
+        assertTrue(mainPage.isBunTabSelected());
     }
 
     @After

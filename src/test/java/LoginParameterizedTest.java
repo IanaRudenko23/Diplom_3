@@ -12,7 +12,9 @@ import org.praktikum.pages.ForgotPasswordPage;
 import org.praktikum.pages.LoginPage;
 import org.praktikum.pages.MainPage;
 import org.praktikum.pages.RegistrationPage;
+
 import java.util.concurrent.TimeUnit;
+
 import static org.hamcrest.Matchers.anything;
 
 @RunWith(Parameterized.class)
@@ -24,7 +26,7 @@ public class LoginParameterizedTest {
     private final String email;
     private final By createBurgerText = By.xpath(".//h1[text()='Соберите бургер']");
 
-    public LoginParameterizedTest(String name,String email, String password, String browser) {
+    public LoginParameterizedTest(String name, String email, String password, String browser) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -34,8 +36,8 @@ public class LoginParameterizedTest {
     @Parameterized.Parameters(name = "Авторизация пользователя:{1},браузер: {3}")
     public static Object[][] clientLogin() {
         return new Object[][]{
-                {"Bulochka","bulochka@open.ru", "qwerty12!", "chrome"},
-                {"Rachel_Green", "rachel_green1990@open.ru","qwerty12!", "yandex"}
+                {"Bulochka", "bulochka@open.ru", "qwerty12!", "chrome"},
+                {"Rachel_Green", "rachel_green1990@open.ru", "qwerty12!", "yandex"}
         };
     }
 
@@ -51,7 +53,7 @@ public class LoginParameterizedTest {
     public void checkLogInFromMainPage() {
         MainPage mainPage = new MainPage(driver);
         mainPage.loginWithAccountButton();
-        LoginBaseUser.logInBaseUser(password,email,driver);
+        LoginBaseUser.logInBaseUser(password, email, driver);
         String expectedResult = "Оформить заказ";
         MatcherAssert.assertThat("Ошибка авторизации", driver.findElement(createBurgerText), anything(expectedResult));
     }
@@ -61,7 +63,7 @@ public class LoginParameterizedTest {
     public void checkLogInFromPersonalAccount() {
         MainPage mainPage = new MainPage(driver);
         mainPage.clickPersonalAccountButtonOnMainPage();
-        LoginBaseUser.logInBaseUser(password,email,driver);
+        LoginBaseUser.logInBaseUser(password, email, driver);
         String expectedResult = "Оформить заказ";
         MatcherAssert.assertThat("Ошибка авторизации", driver.findElement(createBurgerText), anything(expectedResult));
     }
@@ -98,6 +100,6 @@ public class LoginParameterizedTest {
     public void tearDown() {
         LoginBaseUser.logOutBaseUser(driver);
         driver.quit();
-        }
+    }
 }
 

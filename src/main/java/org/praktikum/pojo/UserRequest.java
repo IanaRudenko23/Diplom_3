@@ -10,6 +10,7 @@ public class UserRequest {
         this.email = email;
         this.password = password;
     }
+
     public UserRequest(String password, String email) {
         this.email = email;
         this.password = password;
